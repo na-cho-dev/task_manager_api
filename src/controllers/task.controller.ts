@@ -94,7 +94,7 @@ export class TaskController {
     if (index === -1) throw new NotFoundError("Task not found");
 
     tasks.splice(index, 1);
-    sendResponse(res, 204, true, { message: "Task deleted" });
+    sendResponse(res, 200, true, { message: "Task deleted" });
   };
 }
 

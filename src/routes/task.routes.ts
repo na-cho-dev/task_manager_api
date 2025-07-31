@@ -1,12 +1,13 @@
 import { Router } from "express";
 import { taskController } from "../controllers/task.controller";
+import { validateTaskInput } from "../middlewares/validate-input.middleware";
 
-const taskRouter = Router();
+const router = Router();
 
-taskRouter.get("/", taskController.getAllTasks);
-taskRouter.get("/:id", taskController.getTaskById);
-taskRouter.post("/", taskController.createTask);
-taskRouter.put("/:id", taskController.updateTask);
-taskRouter.delete("/:id", taskController.deleteTask);
+router.get("/", taskController.getAllTasks);
+router.get("/:id", taskController.getTaskById);
+router.post("/", validateTaskInput, taskController.createTask);
+router.put("/:id", validateTaskInput, taskController.updateTask);
+router.delete("/:id", taskController.deleteTask);
 
-export default taskRouter;
+export default router;

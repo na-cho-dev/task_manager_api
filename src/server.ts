@@ -30,7 +30,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
-// ===== ROUTES SECTION - Define all routes here =====
+// =================< ROUTES SECTION >=================
 
 // Root route
 app.get("/", (req: Request, res: Response) => {
@@ -56,26 +56,10 @@ app.get("/health", (req: Request, res: Response) => {
   res.status(200).json(healthData);
 });
 
-// API Info route
-app.get("/api-info", (req: Request, res: Response) => {
-  res.status(200).json({
-    name: "Task Manager API Service",
-    version: "1.0.0",
-    description: "This is an API for the Task Manager Service.",
-    endpoints: {
-      app: "/",
-      health: "/health",
-      detailedHealth: "/health/detailed",
-      docs: "/api-docs",
-      info: "/api-info",
-    },
-  });
-});
-
 // API Documentation Route
 app.use("/api/tasks", taskRouter);
 
-// ===== END ROUTES SECTION =====
+// ================< END ROUTES SECTION >=================
 
 // 404 handler for unmatched routes - MUST be last before error handler
 app.use((req: Request, res: Response) => {
@@ -100,11 +84,11 @@ const startServer = async () => {
     // Start the server
     const server = app.listen(config.PORT, config.HOST, () => {
       logger.info("🚀 Server started successfully!", {
-        Environment: `${config.NODE_ENV}`,
-        Host: `${config.HOST}`,
-        Port: `${config.PORT}`,
-        "Started at": `${new Date().toLocaleString()}`,
-        "API Root": `http://${config.HOST}:${config.PORT}/`,
+        env: `${config.NODE_ENV}`,
+        host: `${config.HOST}`,
+        port: `${config.PORT}`,
+        started_at: `${new Date().toLocaleString()}`,
+        api_root: `http://${config.HOST}:${config.PORT}`,
       });
 
       // Graceful shutdown
